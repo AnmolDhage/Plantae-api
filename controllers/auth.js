@@ -12,7 +12,8 @@ export const register = async (req, res, next) => {
       password: hash,
     });
     await newUser.save();
-    res.status(201).json(newUser);
+    const { password, isAdmin, ...otherDetails } = newUser
+    res.status(201).json(otherDetails);
   } catch (err) {
     next(err);
   }
