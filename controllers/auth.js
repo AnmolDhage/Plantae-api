@@ -35,7 +35,7 @@ export const login = async (req, res, next) => {
       process.env.JWT_SECRET
     );
 
-    const { password, isAdmin, ...userData } = user._doc;
+    const { password, ...userData } = user._doc;
 
     res
       .cookie("plantae_access_token", token, { httpOnly: true })
