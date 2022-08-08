@@ -38,17 +38,18 @@ export const getPlantById = async (req, res, next) => {
   }
 }
 
+
 export const getPlant = async (req, res, next) => {
   try {
-    const page = parseInt(req.query.page) || 0;
-    const limit = parseInt(req.query.limit) || 5;
-    const search = req.query.search || "";
-    let sort = req.query.sort || "name";
-    let category = req.query.category || "All";
+    let { page, limit, search, sort, category, ...others } = req.query;
+    page = parseInt(req.query.page) || 0;
+    limit = parseInt(req.query.limit) || 5;
+    search = req.query.search || "";
+    sort = req.query.sort || "name";
+    category = req.query.category || "All";
     const categoryOptions = await Plant.find().distinct('type');
     category === "All" ? (category = [...categoryOptions]) : (category = req.query.category.split(","));
     req.query.sort ? (sort = req.query.sort.split(",")) : (sort = [sort]);
-    console.log(category)
 
     let sortBy = {};
     if (sort[1]) {
@@ -56,8 +57,7 @@ export const getPlant = async (req, res, next) => {
     } else {
       sortBy[sort[0]] = "asc";
     }
-
-    const plants = await Plant.find({ name: { $regex: search, $options: "i" } })
+    const plants = await Plant.find({ ...others, name: { $regex: search, $options: "i" } })
       .where("type")
       .in([...category])
       .sort(sortBy)
