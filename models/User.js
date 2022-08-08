@@ -9,12 +9,11 @@ const OrderSchema = new mongoose.Schema({
   orderedOn: { type: Date, default: Date.now },
 })
 
-const AddressShema = new mongoose.Schema({
+const AddressSchema = new mongoose.Schema({
   name: String,
   phone: Number,
   address: { houseNo: String, street: String, city: String, state: String, country: String, zipCode: Number },
   addressType: String,
-  isDefault: { type: Boolean, default: false },
 })
 
 const UserSchema = new mongoose.Schema({
@@ -45,8 +44,12 @@ const UserSchema = new mongoose.Schema({
     type: Boolean,
     default: false,
   },
+  defaultAddress: {
+    type: AddressSchema,
+    default: null
+  },
   addresses: {
-    type: [AddressShema],
+    type: [AddressSchema],
   },
   orders: {
     type: [OrderSchema],

@@ -12,7 +12,7 @@ export const register = async (req, res, next) => {
       password: hash,
     });
     await newUser.save();
-    const { password, ...otherDetails } = newUser
+    const { password, ...otherDetails } = newUser._doc
     res.status(201).json(otherDetails);
   } catch (err) {
     next(err);

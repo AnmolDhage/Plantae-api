@@ -72,6 +72,18 @@ export const updateAddress = async (req, res, next) => {
   }
 }
 
+export const updateDefaultAddress = async (req, res, next) => {
+  try {
+    const { userId, addressId } = req.params;
+    const user = await User.findById(userId);
+    const address = user.addresses.id(addressId);
+    const updatedUser = await User.findByIdAndUpdate(userId, { $set: { defaultAddress: address } }, { new: true })
+    res.status(200).json(updatedUser);
+
+  } catch (err) {
+    next(err)
+  }
+}
 
 export const deleteAddress = async (req, res, next) => {
   try {

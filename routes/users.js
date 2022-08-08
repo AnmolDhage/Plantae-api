@@ -1,5 +1,5 @@
 import express from "express"
-import { updateUser, deleteUser, getUser, getUserById, addAddress, deleteAddress, addOrder, deleteOrder, updateAddress, updateUserPassword } from "../controllers/user.js"
+import { updateUser, deleteUser, getUser, getUserById, addAddress, deleteAddress, addOrder, deleteOrder, updateAddress, updateUserPassword, updateDefaultAddress } from "../controllers/user.js"
 import { verifyAdmin, verifyUser } from "../utils/verifyToken.js"
 const router = express.Router();
 
@@ -28,6 +28,9 @@ router.delete("/address/:userId/:addressId", verifyUser, deleteAddress)
 
 //UPDATE ADDRESS
 router.put("/address/:userId/:addressId", verifyUser, updateAddress)
+
+//UPDATE DEFAULT ADDRESS
+router.put("/defaultaddress/:userId/:addressId", verifyUser, updateDefaultAddress)
 
 //ADD Order
 router.post("/order/:id", verifyUser, addOrder)
