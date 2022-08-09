@@ -10,6 +10,7 @@ const OrderSchema = new mongoose.Schema({
 })
 const CartSchema = new mongoose.Schema({
   plantId: String,
+  quantity: Number,
   addedOn: { type: Date, default: Date.now },
 })
 
