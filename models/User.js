@@ -9,8 +9,15 @@ const OrderSchema = new mongoose.Schema({
   orderedOn: { type: Date, default: Date.now },
 })
 const CartSchema = new mongoose.Schema({
-  plantId: String,
-  quantity: Number,
+  plantId: {
+    type: String,
+    required: true,
+    unique: true
+  },
+  quantity: {
+    type: Number,
+    default: 1
+  },
   addedOn: { type: Date, default: Date.now },
 })
 
