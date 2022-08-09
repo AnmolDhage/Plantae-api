@@ -1,5 +1,5 @@
 import express from "express"
-import { updateUser, deleteUser, getUser, getUserById, addAddress, deleteAddress, addOrder, deleteOrder, updateAddress, updateUserPassword, updateDefaultAddress, addCartItem } from "../controllers/user.js"
+import { updateUser, deleteUser, getUser, getUserById, addAddress, deleteAddress, addOrder, deleteOrder, updateAddress, updateUserPassword, updateDefaultAddress, addCartItem, deleteCartItem } from "../controllers/user.js"
 import { verifyAdmin, verifyUser } from "../utils/verifyToken.js"
 const router = express.Router();
 
