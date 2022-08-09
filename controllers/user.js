@@ -107,12 +107,36 @@ export const addOrder = async (req, res, next) => {
   }
 }
 
-
 export const deleteOrder = async (req, res, next) => {
   try {
     const { userId, orderId } = req.params;
     const user = await User.findById(userId);
     user.orders.pull({ _id: orderId }, { new: true });
+    user.save()
+    res.status(200).json("Order deleted");
+  } catch (err) {
+    next(err);
+  }
+}
+
+
+export const addCartItem = async (req, res, next) => {
+  try {
+    const addedCartItem = await User.findByIdAndUpdate({ _id: req.params.id }, { $push: { cart: req.body } });
+    res.status(201).json(addedCartItem);
+  } catch (err) {
+    next(err);
+  }
+}
+
+
+
+
+export const deleteCartItem = async (req, res, next) => {
+  try {
+    const { userId, cartId } = req.params;
+    const user = await User.findById(userId);
+    user.cart.pull({ _id: cartId }, { new: true });
     user.save()
     res.status(200).json("Order deleted");
   } catch (err) {

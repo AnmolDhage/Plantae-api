@@ -1,5 +1,5 @@
 import express from "express"
-import { updateUser, deleteUser, getUser, getUserById, addAddress, deleteAddress, addOrder, deleteOrder, updateAddress, updateUserPassword, updateDefaultAddress } from "../controllers/user.js"
+import { updateUser, deleteUser, getUser, getUserById, addAddress, deleteAddress, addOrder, deleteOrder, updateAddress, updateUserPassword, updateDefaultAddress, addCartItem } from "../controllers/user.js"
 import { verifyAdmin, verifyUser } from "../utils/verifyToken.js"
 const router = express.Router();
 
@@ -32,10 +32,17 @@ router.put("/address/:userId/:addressId", verifyUser, updateAddress)
 //UPDATE DEFAULT ADDRESS
 router.put("/defaultaddress/:userId/:addressId", verifyUser, updateDefaultAddress)
 
-//ADD Order
+//ADD ORDER
 router.post("/order/:id", verifyUser, addOrder)
 
-//DELETE Order
+//DELETE ORDER
 router.delete("/order/:userId/:orderId", verifyUser, deleteOrder)
+
+//ADD CART ITEM
+router.post("/cart/:id", verifyUser, addCartItem)
+
+//DELETE CART ITEM
+router.delete("/cart/:userId/:cartId", verifyUser, deleteCartItem)
+
 
 export default router;

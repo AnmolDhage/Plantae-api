@@ -8,6 +8,10 @@ const OrderSchema = new mongoose.Schema({
   price: Number,
   orderedOn: { type: Date, default: Date.now },
 })
+const CartSchema = new mongoose.Schema({
+  plantId: String,
+  addedOn: { type: Date, default: Date.now },
+})
 
 const AddressSchema = new mongoose.Schema({
   name: String,
@@ -53,6 +57,9 @@ const UserSchema = new mongoose.Schema({
   },
   orders: {
     type: [OrderSchema],
+  },
+  cart: {
+    type: [CartSchema],
   },
 })
 
