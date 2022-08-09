@@ -100,7 +100,7 @@ export const deleteAddress = async (req, res, next) => {
 
 export const addOrder = async (req, res, next) => {
   try {
-    const addedOrder = await User.findByIdAndUpdate({ _id: req.params.id }, { $push: { orders: req.body } });
+    const addedOrder = await User.findByIdAndUpdate({ _id: req.params.id }, { $push: { orders: req.body } }, { new: true });
     res.status(201).json(addedOrder);
   } catch (err) {
     next(err);
@@ -122,7 +122,7 @@ export const deleteOrder = async (req, res, next) => {
 
 export const addCartItem = async (req, res, next) => {
   try {
-    const addedCartItem = await User.findByIdAndUpdate({ _id: req.params.id }, { $push: { cart: req.body } });
+    const addedCartItem = await User.findByIdAndUpdate({ _id: req.params.id }, { $push: { cart: req.body } }, { new: true });
     res.status(201).json(addedCartItem);
   } catch (err) {
     next(err);
