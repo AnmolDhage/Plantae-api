@@ -46,6 +46,11 @@ export const login = async (req, res, next) => {
   }
 };
 
-export const logout = (req, res, next) => {
-  res.clearCookie("plantae_access_token");
+export const logout = (req, res) => {
+  res.cookie("plantae_access_token", "", { maxAge: 0 }).json("Signed Out");
 };
+
+
+// export const logout = (req, res, next) => {
+//   res.clearCookie("plantae_access_token");
+// };
