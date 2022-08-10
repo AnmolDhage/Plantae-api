@@ -24,8 +24,12 @@ const CartSchema = new mongoose.Schema({
 const AddressSchema = new mongoose.Schema({
   name: String,
   phone: Number,
-  address: { houseNo: String, street: String, city: String, state: String, country: String, zipCode: Number },
-  addressType: String,
+  houseNo: String,
+  street: String,
+  city: String,
+  state: String,
+  country: String,
+  zipCode: Number,
 })
 
 const UserSchema = new mongoose.Schema({
