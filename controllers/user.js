@@ -138,7 +138,7 @@ export const deleteCartItem = async (req, res, next) => {
     const user = await User.findById(userId);
     user.cart.pull({ _id: cartId }, { new: true });
     user.save()
-    res.status(200).json("Item removed from cart");
+    res.status(200).json(user);
   } catch (err) {
     next(err);
   }
