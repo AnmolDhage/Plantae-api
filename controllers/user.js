@@ -119,17 +119,24 @@ export const deleteOrder = async (req, res, next) => {
   }
 }
 
+export const getCartItems = async (req, res, next) => {
+  try {
+    const cartItems = await User.findOne({ _id: req.params.user_id }, "cart");
+    res.status(200).json(cartItems);
+  } catch (error) {
+    next(error);
+  }
+};
+
 
 export const addCartItem = async (req, res, next) => {
   try {
     const addedCartItem = await User.findByIdAndUpdate({ _id: req.params.id }, { $push: { cart: req.body } }, { new: true });
-    res.status(201).json(addedCartItem);
+    res.status(201).json("Cart Item Added");
   } catch (err) {
     next(err);
   }
 }
-
-
 
 
 export const deleteCartItem = async (req, res, next) => {
