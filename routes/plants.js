@@ -1,7 +1,10 @@
 import express from "express"
-import { createPlant, updatePlant, deletePlant, getPlant, getPlantById } from "../controllers/plant.js"
+import { createPlant, updatePlant, deletePlant, getPlant, getPlantById, getCategories } from "../controllers/plant.js"
 import { verifyAdmin } from "../utils/verifyToken.js"
 const router = express.Router();
+
+//GET CATEGORIES
+router.get("/categories", getCategories)
 
 //CREATE 
 router.post("/", verifyAdmin, createPlant)
@@ -13,5 +16,6 @@ router.delete("/:id", verifyAdmin, deletePlant)
 router.get("/:id", getPlantById)
 //GET ALL
 router.get("/", getPlant)
+
 
 export default router;
