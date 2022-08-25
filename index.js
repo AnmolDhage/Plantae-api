@@ -1,15 +1,14 @@
-import express from "express"
-import dotenv from "dotenv"
+import express from "express";
+import dotenv from "dotenv";
 import mongoose from "mongoose";
 import plantsRoute from "./routes/plants.js";
 import usersRoute from "./routes/users.js";
 import authRoute from "./routes/auth.js";
-import cors from "cors"
-import cookieParser from "cookie-parser"
+import cors from "cors";
+import cookieParser from "cookie-parser";
 const PORT = process.env.PORT || 8800;
 const app = express();
 dotenv.config();
-
 
 const connect = async () => {
   try {
@@ -18,25 +17,25 @@ const connect = async () => {
     console.log(err);
     throw err;
   }
-}
+};
 
 mongoose.connection.on("disconnected", () => {
   console.log("DB Disconnected ");
-})
+});
 
 mongoose.connection.on("connected", () => {
   console.log("DB Connected");
-})
+});
 
 app.get("/", (req, res) => {
   res.send(`Plantae API connected on port ${PORT}`);
-})
+});
 
 //middleware
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
-app.use(cors());
-app.use(cookieParser())
+app.use(cors({ credentials: true }));
+app.use(cookieParser());
 
 app.use("/api/auth", authRoute);
 app.use("/api/plants", plantsRoute);
@@ -50,9 +49,9 @@ app.use((err, req, res, next) => {
     message: errorMessage,
     stack: err.stack,
   });
-})
+});
 
 app.listen(PORT, (req, res) => {
   connect();
   console.log(`Connection established on port ${PORT}`);
-})
+});
