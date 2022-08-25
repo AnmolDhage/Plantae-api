@@ -150,3 +150,14 @@ export const deleteCartItem = async (req, res, next) => {
     next(err);
   }
 }
+
+
+export const countCartItem = async (req, res, next) => {
+  try {
+    const userId = req.params.id;
+    const count = User.aggregate([{ $match: { _id: userId } }, { $project: { cart: { $size: '$cart' } } }])
+    res.status(200).json(count);
+  } catch (err) {
+    next(err);
+  }
+}

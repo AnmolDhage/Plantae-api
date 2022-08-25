@@ -82,3 +82,14 @@ export const getPlant = async (req, res, next) => {
     next(err);
   }
 }
+
+
+export const getCategories = async (req, res, next) => {
+  try {
+    const categoryOptions = await Plant.find().distinct('type');
+    res.status(200).json(categoryOptions);
+  } catch (err) {
+    next(err);
+  }
+
+}
