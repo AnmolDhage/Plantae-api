@@ -12,7 +12,7 @@ export const register = async (req, res, next) => {
       password: hash,
     });
     await newUser.save();
-    const { password, ...otherDetails } = newUser._doc
+    const { password, ...otherDetails } = newUser._doc;
     res.status(201).json(otherDetails);
   } catch (err) {
     next(err);
@@ -38,7 +38,11 @@ export const login = async (req, res, next) => {
     const { password, ...userData } = user._doc;
 
     res
-      .cookie("plantae_access_token", token, { httpOnly: true })
+      .cookie("plantae_access_token", token, {
+        httpOnly: true,
+        secure: true,
+        sameSite: "none",
+      })
       .status(200)
       .json({ ...userData });
   } catch (err) {
@@ -47,9 +51,15 @@ export const login = async (req, res, next) => {
 };
 
 export const logout = (req, res) => {
-  res.cookie("plantae_access_token", "", { maxAge: 0 }).json("Signed Out");
+  res
+    .cookie("plantae_access_token", "", {
+      httpOnly: true,
+      secure: true,
+      sameSite: "none",
+      maxAge: 0,
+    })
+    .json("Signed Out");
 };
-
 
 // export const logout = (req, res, next) => {
 //   res.clearCookie("plantae_access_token");
