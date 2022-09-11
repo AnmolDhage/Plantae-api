@@ -161,3 +161,17 @@ export const countCartItem = async (req, res, next) => {
     next(err);
   }
 }
+
+
+export const addRecent = async (req, res, next) => {
+  try {
+    const userId = req.params.user_id;
+    const user = User.findById(userId);
+    const recentCount = user.recent.length;
+    // const count = user.recent;
+    res.status(200).json(recentCount);
+  } catch (err) {
+    next(err);
+
+  }
+}

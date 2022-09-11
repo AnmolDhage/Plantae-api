@@ -9,11 +9,7 @@ const OrderSchema = new mongoose.Schema({
   orderedOn: { type: Date, default: Date.now },
 })
 const CartSchema = new mongoose.Schema({
-  plantId: {
-    type: String,
-    required: true,
-    unique: true
-  },
+  plantId: String,
   quantity: {
     type: Number,
     default: 1
@@ -73,6 +69,9 @@ const UserSchema = new mongoose.Schema({
   cart: {
     type: [CartSchema],
   },
+  recent: {
+    type: [String],
+  }
 })
 
 
